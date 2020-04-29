@@ -1,0 +1,38 @@
+.footer {
+    width: 100%;
+    min-height: 60px;
+    background: $color-background;
+    margin-top: 40px;
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        min-height: 60px;
+        max-width: 1440px;
+        margin: 0 auto;
+        @include media-laptop {
+            max-width: 1060px;
+        }
+        @include media-tablet {
+            max-width: 680px;
+        }
+        @include media-mobile {
+            max-width: 440px;
+        }
+        @include media-mobile_small {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+    }
+}
+
+.contact-link {
+    color: #eee;
+    text-decoration: none;
+    &:hover {
+        color: chartreuse;
+    }
+}

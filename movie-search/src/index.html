@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <title>Movie search</title>
 </head>
-<body>
+<body class="body">
+<header class="header">
+    <h1>MovieSearch</h1>
+</header>
+<main class="main">
+    <form class="search-form">
+        <input class="search-input form-element " type="text" placeholder="Search movie" autofocus="">
+        <button class="search-button form-element " type="submit">Search</button>
+        <span data-name="clear-button" class="clear-button"></span>
+        <span data-name="keyboard-button" class="keyboard-button"></span>
+      </form>
+    <p class="info"></p>
 
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+        <div class="swiper-pagination"></div>
+    
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+</main>
+<footer class="footer">
+    <div class="footer__container">
+        <a href="https://rs.school/" class="contact-link">RS School 2020q1</a>
+        <a href="https://github.com/" class="github-link contact-link">github account</a>
+    </div>
+</footer>
 </body>
 </html>

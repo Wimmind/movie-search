@@ -1,0 +1,13 @@
+.header {
+    width: 100%;
+    height: 110px;
+    color: #fff;
+    background: $color-background;
+    margin-bottom: 40px;
+    padding-top: 25px;
+    & h1 {
+        font-size: 40px;
+        font-weight: 900;
+        text-align: center;
+    }
+}
