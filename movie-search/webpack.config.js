@@ -13,8 +13,14 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'script.js',
     },
+    devtool: "eval-cheap-source-map",
     module: {
         rules: [
+            {
+                test: /.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+            },
             {
                 test: /\.html$/,
                 use: [
@@ -25,16 +31,6 @@ module.exports = {
                         },
                     },
                 ],
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                    presets: ['@babel/preset-env']
-                    }
-                }
             },
             {
                 test: /\.s[ac]ss$/i,

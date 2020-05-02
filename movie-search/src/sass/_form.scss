@@ -44,10 +44,12 @@
 
 .search-button {
     width: 100px;
-    background: rebeccapurple;
-    border: 1px solid rebeccapurple;
-    color: rgb(255, 255, 255);
+    background: crimson;
+    border: 1px solid crimson;
+    color: #fff;
+    text-align: center;
     cursor: pointer;
+    padding-top: 10px;
     @include media-mobile_small {
         width: 300px;
         min-height: 44px
