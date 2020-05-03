@@ -21,8 +21,7 @@
         max-width: 680px;
     }
     @include media-mobile {
-        max-width: 440px;
-        padding: 0 10px;
+      max-width: 440px;
     }
 }
 
@@ -47,67 +46,3 @@ input:focus {
     color: crimson;
 }
 
-.swiper-wrapper {
-    width: 100%;
-    height: 600px;
-    margin-bottom: 50px;
-}
-
-.card {
-    width: 300px !important;
-    border: 0;
-    margin: 10px 0px;  
-    overflow: hidden;
-}
-
-.card-header {
-    display: block;
-    height: 43px;
-    margin-bottom: 15px;
-    overflow: hidden;
-    background-color: #fff;
-    text-overflow: ellipsis;
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    padding: 15px;
-    white-space: pre-wrap; 
-    text-decoration: none;
-    &:hover {
-      color: crimson;
-    }
-  }
-  
-  .card-body {
-    height: 445px;
-    background-size: cover;
-  }
-  
-  .card-footer {
-    color: #000;
-    background-color: #fff;
-    text-align: center;
-    padding: 15px;
-    padding-bottom: 5px;
-  }
-  
-  .card-imbd {
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .card-imbd span {
-    position: relative;
-    padding-left: 10px;
-  }
-  
-  .card-imbd span::before {
-    content: "";
-    position: absolute;
-    background-image: url(/img/star.svg);
-    width: 24px;
-    height: 24px;
-    top: -2px;
-    left: -25px;
-  }
