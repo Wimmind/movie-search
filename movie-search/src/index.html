@@ -12,11 +12,12 @@
 </header>
 <main class="main">
     <form class="search-form">
-        <input class="search-input form-element " type="text" placeholder="Search movie" autofocus="" value="dream">
+        <input class="search-input form-element " type="text" placeholder="Search movie" autofocus="" value="">
         <div class="search-button form-element " type="submit">Search</div>
-        <span class="clear-button"></span>
-        <span class="keyboard-button"></span>
+        <span class="clear-button" title="CLEAR"></span>
+        <span class="keyboard-button" title="KEYBOARD"></span>
       </form>
+    <div class="keyboard-wrapper keyboard-hidden"></div>
     <div class="lds-roller" id="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     <p class="info"></p>
     <div class="swiper-container">
@@ -29,7 +30,6 @@
         
         <div class="swiper-scrollbar"></div>
     </div>
-
 </main>
 <footer class="footer">
     <div class="footer__container">

@@ -1,13 +1,16 @@
 import '@babel/polyfill';
 import swiper from './js/swiper';
+
+const ruRe = new RegExp('(^[А-я0-9]+)(?!.*[A-z])$');
+import showKeyboard from './js/keyboard';
+
+
 import languageСheck from './js/languageCheck';
 import getMovieSlides from './js/fillSwiper';
 
 const buttonSearch = document.querySelector('.search-button');
 const buttonClear = document.querySelector('.clear-button');
 
-
-const ruRe = new RegExp('(^[А-я0-9]+)(?!.*[A-z])$');
 
 let currentPage = 1;
 
@@ -62,9 +65,16 @@ document.addEventListener('keydown', (event) => {
       getMovieSlides(word);
     }
   }
-});
+})
 
 // очистка
 buttonClear.addEventListener('click', () => {
   document.querySelector('.search-input').value = '';
+  document.querySelector('.search-input').focus();
+});
+
+document.querySelector('.keyboard-button').addEventListener('click', () => {
+  document.querySelector('.keyboard-wrapper').classList.toggle('keyboard-hidden');
+  showKeyboard();
+  document.querySelector('.search-input').focus();
 });

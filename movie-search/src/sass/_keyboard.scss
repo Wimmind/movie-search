@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Bangers';
+    font-style: normal;
+    font-weight: 400;
+    src: local('bangers-regular'), local('bangers regular'),
+    url('../assets/fonts/bangers-regular.otf') format("truetype");
+}
+
+.keyboard {   
+    user-select: none;
+    width: 700px;
+    height: 260px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    position: relative;
+}
+
+.keyboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.keyboard-row:not(:first-of-type) {
+    margin-top: 10px;
+}
+
+.key {
+    font-family: Bangers;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #37393d;
+    text-align: center;
+    line-height: 40px;
+    color: cyan;
+    font-size: 16px;
+}
+
+.key_medium {
+    width: 99px;
+}
+
+.key_small {
+    width: 53px;
+}
+
+.key_big {
+    width: 310px;
+}
+
+
+.key:hover {
+    cursor: pointer;
+    background-color: blueviolet;
+}
+
+.active {
+    background-color: blueviolet;
+    border-radius: 20px;
+    transition: all 0.3 ease-in-out;
+}
+
+
+.circleCapsLock {
+    width: 10px;
+    height: 10px;
+    background: grey;
+    border-radius: 50%;
+    position: absolute;
+    top: 123px;
+    left: 92px;
+}
+
+.capsActive {
+    background: lawngreen;
+}
+
+.h1 {
+    font-size: 30px;
+    color: red
+}
+
+.keyboard-hidden {
+    display: none;
+}

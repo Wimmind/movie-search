@@ -9,6 +9,7 @@ const doSlide = async (film, num) => {
   cardLink.href = `https://www.imdb.com/title/${film.imdbID}/videogallery`;
   cardLink.target = '_blank';
   cardLink.innerText = film.Title;
+  cardLink.setAttribute('title',`${film.Title}`);
   cardLink.classList.add('card-header');
 
   const cardImage = document.createElement('img');
