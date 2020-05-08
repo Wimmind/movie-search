@@ -30,7 +30,7 @@
     font-size: 22px;
     padding-left: 50px;
     padding-right: 100px;
-    @include media-mobile {
+    @include media-tablet {
         padding-right: 50px;
     }
     @include media-mobile_small {
@@ -65,7 +65,7 @@
     background-repeat: no-repeat;
     right: 160px;
     cursor: pointer;
-    @include media-mobile {
+    @include media-tablet {
         right: 108px;
     }
     @include media-mobile_small {
@@ -83,7 +83,7 @@
     background-position-y: 6px;
     background-repeat: no-repeat;
     cursor: pointer;
-    @include media-mobile {
+    @include media-tablet {
         display: none;
     }
 }

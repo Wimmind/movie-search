@@ -6,7 +6,10 @@ const swiper = new Swiper('.swiper-container', {
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
+    dynamicBullets: true,
+    dynamicMainBullets: 4,
   },
+  centerInsufficientSlides: true,
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',

@@ -19,7 +19,7 @@ const doSlide = async (film, num) => {
 
   const cardFooter = document.createElement('div');
   cardFooter.classList.add('card-footer');
-  const rating = await getRating(film.imdbID, num);
+  const rating = await getRating(film.imdbID, num) === 'N/A' ? 'nothing' : await getRating(film.imdbID, num);
   cardFooter.innerHTML = `${film.Year}<div style="display:flex; align-items:center;"><span class='starIcon'></span>${rating}</div>`;
 
   card.append(cardLink);

@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import swiper from './js/swiper';
 
-const ruRe = new RegExp('(^[А-я0-9]+)(?!.*[A-z])$');
+const ruRe = new RegExp('(^[А-я]+)(?!.*[A-z])$');
 import showKeyboard from './js/keyboard';
 
 
@@ -14,55 +14,43 @@ const buttonClear = document.querySelector('.clear-button');
 
 let currentPage = 1;
 
+let newWord = false;
 // bea3a778
 
 
 swiper.on('slideChange', () => {
+  newWord = false;
   const word = document.querySelector('.search-input').value;
-  if (word === '') {
-    return false;
-  }
-  if ((window.innerWidth <= 700) && (swiper.activeIndex === 9)) {
+  if (swiper.activeIndex >=(swiper.slides.length - 5)){
     currentPage += 1;
-    getMovieSlides(word, currentPage);
+    getMovieSlides(word, currentPage,newWord);
   }
-  if ((window.innerWidth > 700 && window.innerWidth <= 1200) && (swiper.activeIndex === 8)) {
-    currentPage += 1;
-    getMovieSlides(word, currentPage);
-  }
-  if ((window.innerWidth > 1200 && window.innerWidth <= 1600) && (swiper.activeIndex === 7)) {
-    currentPage += 1;
-    getMovieSlides(word, currentPage);
-  }
-  if ((window.innerWidth > 1600) && (swiper.activeIndex === 6)) {
-    currentPage += 1;
-    getMovieSlides(word, currentPage);
-  }
-  return false;
 });
 
 
 // на кнопку сеарч
 buttonSearch.addEventListener('click', () => {
+  newWord = true;
   currentPage = 1;
   const word = document.querySelector('.search-input').value;
   if (ruRe.test(word)) {
-    languageСheck(word);
+    languageСheck(word,currentPage,newWord);
   } else {
-    getMovieSlides(word);
+    getMovieSlides(word,currentPage,newWord);
   }
 });
 
 // на ентер
 document.addEventListener('keydown', (event) => {
-  currentPage = 1;
   if (event.key === 'Enter') {
     event.preventDefault();
+    newWord = true;
+    currentPage = 1;
     const word = document.querySelector('.search-input').value;
     if (ruRe.test(word)) {
-      languageСheck(word);
+      languageСheck(word,currentPage,newWord);
     } else {
-      getMovieSlides(word);
+      getMovieSlides(word,currentPage,newWord);
     }
   }
 })

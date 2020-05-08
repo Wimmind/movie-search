@@ -34,7 +34,7 @@ export default function showKeyboard() {
       ['ArrowUp', '↑', '↑', '↑', '↑'], ['ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift'],
     ],
     [
-      ['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['MetaLeft', 'Rus', 'Rus', 'Eng', 'Eng'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'],
+      ['ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'], ['MetaLeft', 'RUS', 'RUS', 'ENG', 'ENG'], ['AltLeft', 'Alt', 'Alt', 'Alt', 'Alt'], ['Space', 'Space', 'Space', 'Space', 'Space'],
       ['AltRight', 'Alt', 'Alt', 'Alt', 'Alt'],
       ['ArrowLeft', '←', '←', '←', '←'], ['ArrowDown', '↓', '↓', '↓', '↓'], ['ArrowRight', '→', '→', '→', '→'], ['ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl'],
     ],
@@ -70,7 +70,8 @@ export default function showKeyboard() {
       if (button[0] === 'Space') {
         buttonKey.classList.add('key_big', 'system');
       }
-      if (button[0] === 'MetaLeft' || button[0] === 'AltLeft' || button[0] === 'AltRight' || button[0] === 'Delete' || button[0] === 'Tab') {
+      if (button[0] === 'MetaLeft' || button[0] === 'AltLeft' || button[0] === 'AltRight' || button[0] === 'Delete' || button[0] === 'Tab'|| button[0] === 'ArrowDown' || button[0] === 'ArrowUp'
+      || button[0] === 'ArrowRight' || button[0] === 'ArrowLeft') {
         buttonKey.classList.add('system');
       }
 
@@ -132,8 +133,6 @@ export default function showKeyboard() {
       }
     }
   };
-
-
   const backspaceFunc = () => {
     const startText = textarea.selectionStart;
     if (textarea.selectionStart !== textarea.selectionEnd) {
@@ -179,7 +178,6 @@ export default function showKeyboard() {
       document.querySelector('.search-input').focus();
     }
   });
-
   document.querySelector('.keyboard').addEventListener('mousedown', (event) => {
     document.querySelector('.search-input').focus();
     if (event.target.classList.contains('key')) {
@@ -219,10 +217,6 @@ export default function showKeyboard() {
         }
         generateKeyboard(language, shiftButton);
       }
-      if (systemValue === 'ShiftLeft') {
-        shiftButton = true;
-        generateKeyboard(language, shiftButton);
-      }
 
       if (systemValue === 'MetaLeft'){
         if (!ctrlAltPressed) {
@@ -236,9 +230,12 @@ export default function showKeyboard() {
         generateKeyboard(language, shiftButton);
       }
       
-      if (systemValue === 'ShiftRight') {
-        shiftButton = true;
-        generateKeyboard(language, shiftButton);
+      if (systemValue === 'ArrowLeft') {
+        textarea.selectionEnd =  textarea.selectionEnd - 1 >= 0 ?  textarea.selectionEnd - 1 : 0;
+      }
+
+      if (systemValue === 'ArrowRight') {
+        textarea.selectionStart += 1;
       }
     }
   });
@@ -246,132 +243,7 @@ export default function showKeyboard() {
     if (event.target.classList.contains('key')) {
       event.target.classList.remove('active');
       const systemValue = event.target.getAttribute('system-value');
-      if (systemValue === 'ShiftLeft') {
-        shiftButton = false;
-        generateKeyboard(language, shiftButton);
-      }
-      if (systemValue === 'ShiftRight') {
-        shiftButton = false;
-        generateKeyboard(language, shiftButton);
-      }
     }
   });
 
-
-  // клавиша клавиутры нажатие
-
-  const keyDownFunc = (event) => {
-    if (divWrapper.className !== 'keyboard-wrapper keyboard-hidden') {
-      event.preventDefault();
-      document.querySelector('.search-input').focus();
-
-      const buttonKey = document.querySelector(`[system-value=${event.code}]`);
-
-      buttonKey.classList.add('active');
-
-      const systemValue = buttonKey.getAttribute('system-value');
-
-      if (!capsLockButton) {
-        textarea.setRangeText(buttonKey.getAttribute('value'), textarea.selectionStart, textarea.selectionEnd, 'end');
-      } else {
-        textarea.setRangeText(buttonKey.getAttribute('value').toUpperCase(), textarea.selectionStart, textarea.selectionEnd, 'end');
-      }
-
-      if (systemValue === 'Backspace') {
-        backspaceFunc();
-      }
-      if (systemValue === 'Tab') {
-        tabFunc();
-      }
-      if (systemValue === 'Space') {
-        spaceFunc();
-      }
-      if (systemValue === 'Enter') {
-        enterFunc();
-      }
-      if (systemValue === 'Delete') {
-        deleteFunc();
-      }
-      if (systemValue === 'ShiftLeft') {
-        shiftButton = true;
-        generateKeyboard(language, shiftButton);
-      }
-
-      if (systemValue === 'ShiftRight') {
-        shiftButton = true;
-        generateKeyboard(language, shiftButton);
-      }
-
-      if (systemValue === 'CapsLock') {
-        if (!capsLockButton) {
-          document.querySelector('.circleCapsLock').classList.add('capsActive');
-          capsLockButton = true;
-        } else {
-          document.querySelector('.circleCapsLock').classList.remove('capsActive');
-          capsLockButton = false;
-        }
-        generateKeyboard(language, shiftButton);
-      }
-
-      if (systemValue === 'AltLeft') {
-        altButton = true;
-      }
-      if (systemValue === 'ControlLeft') {
-        ctrlButton = true;
-      }
-
-      if (systemValue === 'MetaLeft'){
-        if (!ctrlAltPressed) {
-          language = 3;
-          ctrlAltPressed = true;
-        } else {
-          language = 1;
-          ctrlAltPressed = false;
-        }
-        localStorage.setItem('language', language);
-        generateKeyboard(language, shiftButton);
-      }
-
-      if (altButton && ctrlButton) {
-        if (!ctrlAltPressed) {
-          language = 3;
-          ctrlAltPressed = true;
-        } else {
-          language = 1;
-          ctrlAltPressed = false;
-        }
-        localStorage.setItem('language', language);
-        generateKeyboard(language, shiftButton);
-      }
-    }
-  };
-
-  document.addEventListener('keydown', keyDownFunc);
-
-  document.addEventListener('keyup', (event) => {
-    const buttonKey = document.querySelector(`[system-value=${event.code}]`);
-    buttonKey.classList.remove('active');
-
-    const systemValue = buttonKey.getAttribute('system-value');
-
-    if (systemValue === 'AltLeft') {
-      altButton = false;
-    }
-    if (systemValue === 'ControlLeft') {
-      ctrlButton = false;
-    }
-
-    if (systemValue === 'ShiftLeft') {
-      shiftButton = false;
-      generateKeyboard(language, shiftButton);
-    }
-    if (systemValue === 'ShiftRight') {
-      shiftButton = false;
-      generateKeyboard(language, shiftButton);
-    }
-  });
-
-  if (divWrapper.classList.contains('keyboard-hidden')) {
-    document.removeEventListener('keydown', keyDownFunc);
-  }
 }

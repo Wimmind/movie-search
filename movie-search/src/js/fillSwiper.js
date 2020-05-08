@@ -4,7 +4,7 @@ import doSlide from './doSlide';
 const spinner = document.querySelector('#spinner');
 const fetch = require('node-fetch');
 
-export default async function getMovieSlides(word, num) {
+export default async function getMovieSlides(word, num, newWord) {
   spinner.style.display = 'block';
   document.querySelector('.info').innerText = '';
   const url = `https://www.omdbapi.com/?s=${word}&apikey=49ee8599&page=${num}`;
@@ -13,7 +13,11 @@ export default async function getMovieSlides(word, num) {
   if (data.Response === 'True') {
     const card = data.Search.map((item) => doSlide(item, num));
     await Promise.all(card);
-    swiper.removeAllSlides();
+
+    if (newWord) {
+      swiper.removeAllSlides();
+    }
+
     card.forEach((item) => item.then((result) => {
       swiper.appendSlide(result);
     }));
@@ -33,4 +37,5 @@ export default async function getMovieSlides(word, num) {
 }
 
 
-getMovieSlides('dream', 1);
+getMovieSlides('dream', 1,false);
+document.querySelector('.search-input').selectionStart = document.querySelector('.search-input').value.length

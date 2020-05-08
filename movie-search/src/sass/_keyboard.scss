@@ -35,7 +35,7 @@
     background-color: #37393d;
     text-align: center;
     line-height: 40px;
-    color: cyan;
+    color: #fff;
     font-size: 16px;
 }
 
@@ -54,11 +54,11 @@
 
 .key:hover {
     cursor: pointer;
-    background-color: blueviolet;
+    background-color: crimson;
 }
 
 .active {
-    background-color: blueviolet;
+    background-color: crimson;
     border-radius: 20px;
     transition: all 0.3 ease-in-out;
 }
