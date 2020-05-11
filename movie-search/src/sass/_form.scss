@@ -32,7 +32,7 @@
     padding-left: 50px;
     padding-right: 130px;
     @include media-tablet {
-        padding-right: 100px;
+        padding-right: 69px;
     }
     @include media-mobile_small {
         width: 100%;
@@ -59,9 +59,7 @@
         
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     }
-    &:focus {
-        transform: scale(0.9);
-    }
+
 }
 
 .clear-button {
@@ -74,7 +72,7 @@
     right: 200px;
     cursor: pointer;
     @include media-tablet {
-        right: 108px;
+        right: 140px;
     }
     @include media-mobile_small {
        display: none;
@@ -85,19 +83,23 @@
     position: absolute;
     width: 40px;
     height: 45px;
-    background: violet;
+    background: url(../assets/icon/micro.png);
     right: 160px;
-   // background-position-x: center;
-   // background-position-y: 6px;
-    //background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 6px;
+    background-repeat: no-repeat;
+    opacity: 0.6;
     cursor: pointer;
+    @include media-tablet {
+        right: 100px;
+    }
     @include media-mobile_small {
         right: 48px;
     }
 }
 
 .microphone-active {
-    background: red;
+    opacity: 1;
 }
 
 .keyboard-button {

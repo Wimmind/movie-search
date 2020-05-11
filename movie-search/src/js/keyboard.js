@@ -1,5 +1,8 @@
-const latinReg = /[a-z]/gi;
-const cyrillicReg = /[а-я]/gi;
+
+const buttonSearch = document.querySelector('.search-button');
+const buttonClear = document.querySelector('.clear-button');
+const cyrillicReg = /^[А-ЯЁ][а-яё]*$/i;
+const spinner = document.querySelector('#spinner');
 
 export default function showKeyboard() {
   const divWrapper = document.querySelector('.keyboard-wrapper');
@@ -10,8 +13,9 @@ export default function showKeyboard() {
   keyboard.classList.add('keyboard');
 
   const hiddenButton = document.createElement('div');
+  hiddenButton.classList.add('clear-button_keyboard');
   
-  divWrapper
+  divWrapper.append(hiddenButton);
   divWrapper.append(keyboard);
 
   const buttons = [
@@ -147,19 +151,7 @@ export default function showKeyboard() {
     textarea.setRangeText(' ', textarea.selectionStart, textarea.selectionEnd, 'end');
   };
   const enterFunc = async () => {
-    const word = document.querySelector('.search-input').value;
-    try {
-      if (cyrillicReg.test(word) && !latinReg.test(word)) {
-        await languageСheck(word,1,true);
-      } else {
-        await getMovieSlides(word,1,true);
-      }
-    } catch (err) {
-      document.querySelector('.info').innerText = `Something went wrong, ${err.message}`;
-      console.error('Something went wrong', err);
-    } finally {
-      spinner.style.display = 'none';
-    }
+    buttonSearch.click();
   };
   const deleteFunc = () => {
     const startText = textarea.selectionStart;
@@ -282,5 +274,8 @@ export default function showKeyboard() {
     };
   };
 
+  hiddenButton.addEventListener('click',()=>{
+    document.querySelector('.keyboard-button').click();
+  })
 
 }

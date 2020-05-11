@@ -13,6 +13,8 @@
     background-color: rosybrown;
     border-radius: 10px;
     box-shadow: 0 0 4px #000;
+    display: flex;
+    flex-direction: column;
 }
 
 .keyboard {   
@@ -21,7 +23,6 @@
     height: 260px;
     margin: 10px auto;
     padding: 10px;
-    border: 1px solid #000;
     border-radius: 5px;
     position: relative;
 }
@@ -94,4 +95,15 @@
 
 .keyboard-hidden {
     display: none;
+}
+
+.clear-button_keyboard {
+    width: 20px;
+    height: 20px;
+    background-image: url(../assets/icon/clear.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 667px;
+    margin-top: 9px;
+    cursor: pointer;
 }

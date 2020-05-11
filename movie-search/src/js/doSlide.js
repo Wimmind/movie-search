@@ -1,5 +1,4 @@
 import getRating from './getRating';
-const errorWindow = document.querySelector('.info');
 
 const doSlide = async (film, page) => {
   const card = document.createElement('div');
@@ -26,7 +25,6 @@ const doSlide = async (film, page) => {
     }
   } catch (err) {
     cardImage.src = '../assets/image/no-poster.jpg';
-    errorWindow.innerText = 'You did not enter a search query';
     console.error('we have trouble with Poster', film.Poster);
   }
   const cardFooter = document.createElement('div');

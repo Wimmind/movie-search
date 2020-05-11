@@ -1,26 +1,24 @@
 import '@babel/polyfill';
 import swiper from './js/swiper';
 
-const latinReg = /[a-z]/gi;
-const cyrillicReg = /[а-я]/gi;
+const buttonSearch = document.querySelector('.search-button');
+const buttonClear = document.querySelector('.clear-button');
+const cyrillicReg = /^[А-ЯЁ][а-яё]*$/i;
+const spinner = document.querySelector('#spinner');
 
 import showKeyboard from './js/keyboard';
 import languageСheck from './js/languageCheck';
 import getMovieSlides from './js/fillSwiper';
 import addNewPage from './js/addNewPage';
 
-const buttonSearch = document.querySelector('.search-button');
-const buttonClear = document.querySelector('.clear-button');
-const spinner = document.querySelector('#spinner');
 
 let inputWord = document.querySelector('.search-input');
 
-let currentWord = 'dream';
+let currentWord = 'crank';
 let currentPage = 1;
 
 
 export default {countPage:1};
-            
 
 async function firstRequest(){
   try {
@@ -44,11 +42,11 @@ swiper.on('slideChange', () => {
 
 // на кнопку сеарч
 buttonSearch.addEventListener('click', async(event) => {
-  currentPage = 1;
   event.preventDefault();
+  currentPage = 1;
   currentWord = inputWord.value;
   try {
-    if (cyrillicReg.test(currentWord) && !latinReg.test(inputWord.value)) {
+    if (cyrillicReg.test(currentWord)) {
       await languageСheck(currentWord,currentPage,true);
     } else {
       await getMovieSlides(currentWord,currentPage,true);
@@ -63,12 +61,12 @@ buttonSearch.addEventListener('click', async(event) => {
 
 // на ентер
 document.addEventListener('keydown', async (event) => {
-  currentPage = 1;
-  currentWord = inputWord.value;
   if (event.key === 'Enter') {
+    currentPage = 1;
+    currentWord = inputWord.value;
     event.preventDefault();
     try {
-      if (cyrillicReg.test(currentWord) && !latinReg.test(currentWord)) {
+      if (cyrillicReg.test(currentWord)) {
         await languageСheck(currentWord,currentPage,true);
       } else {
         await getMovieSlides(currentWord,currentPage,true);
@@ -89,7 +87,6 @@ buttonClear.addEventListener('click', () => {
 });
 
 document.querySelector('.keyboard-button').addEventListener('click', () => {
-
   document.querySelector('.keyboard-wrapper').classList.toggle('keyboard-hidden');
   showKeyboard();
   inputWord.focus();
