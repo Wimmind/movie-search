@@ -12,6 +12,9 @@
 }
 
 .main {
+    width: 100%;
+}
+.main-wrapper {
     max-width: 1440px;
     margin: 0 auto;
     @include media-laptop {
@@ -44,5 +47,7 @@ input:focus {
     font-weight: 400;
     text-align: center;
     color: crimson;
+    @include media-mobile_small {
+        margin-bottom: 80px;
+    }
 }
-

@@ -6,6 +6,15 @@
     url('../assets/fonts/bangers-regular.otf') format("truetype");
 }
 
+.keyboard-wrapper {
+    z-index: 100;
+    position: absolute;
+    cursor: grab;
+    background-color: rosybrown;
+    border-radius: 10px;
+    box-shadow: 0 0 4px #000;
+}
+
 .keyboard {   
     user-select: none;
     width: 700px;

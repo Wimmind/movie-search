@@ -7,6 +7,7 @@
     margin-bottom: 25px;
     @include media-mobile_small {
        flex-direction: column;
+       padding: 0 50px;
     }
 }
 
@@ -29,14 +30,14 @@
     cursor: text;
     font-size: 22px;
     padding-left: 50px;
-    padding-right: 100px;
+    padding-right: 130px;
     @include media-tablet {
-        padding-right: 50px;
+        padding-right: 100px;
     }
     @include media-mobile_small {
-        width: 300px;
+        width: 100%;
         padding-left: 10px;
-        padding-right: 10px;
+        padding-right: 33px;
         background-image: none;
         margin-bottom: 20px;
     }
@@ -47,12 +48,19 @@
     background: crimson;
     border: 1px solid crimson;
     color: #fff;
-    text-align: center;
     cursor: pointer;
-    padding-top: 10px;
+    transition: 0.1s;
+    font-size: 20px;
     @include media-mobile_small {
-        width: 300px;
+        width: 100%;
         min-height: 44px
+    }
+    &:hover {
+        
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    &:focus {
+        transform: scale(0.9);
     }
 }
 
@@ -63,7 +71,7 @@
     background-image: url(../assets/icon/clear.png);
     background-position: center;
     background-repeat: no-repeat;
-    right: 160px;
+    right: 200px;
     cursor: pointer;
     @include media-tablet {
         right: 108px;
@@ -71,6 +79,25 @@
     @include media-mobile_small {
        display: none;
     }
+}
+
+.micro-button {
+    position: absolute;
+    width: 40px;
+    height: 45px;
+    background: violet;
+    right: 160px;
+   // background-position-x: center;
+   // background-position-y: 6px;
+    //background-repeat: no-repeat;
+    cursor: pointer;
+    @include media-mobile_small {
+        right: 48px;
+    }
+}
+
+.microphone-active {
+    background: red;
 }
 
 .keyboard-button {

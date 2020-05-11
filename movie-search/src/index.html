@@ -11,24 +11,28 @@
     <h1>MovieSearch</h1>
 </header>
 <main class="main">
-    <form class="search-form">
-        <input class="search-input form-element " type="text" placeholder="Search movie" autofocus="" value="dream">
-        <div class="search-button form-element " type="submit">Search</div>
-        <span class="clear-button" title="CLEAR"></span>
-        <span class="keyboard-button" title="KEYBOARD"></span>
-      </form>
-    <div class="keyboard-wrapper keyboard-hidden"></div>
-    <div class="lds-roller" id="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    <p class="info"></p>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
+    <div class="main-wrapper">
+        <form class="search-form">
+            <input class="search-input form-element " type="text" placeholder="Search movie" autofocus="" value="">
+            <button class="search-button form-element " type="submit">search</button>
+            <span class="clear-button" title="CLEAR"></span>
+            <span class="micro-button" title="MICRO"></span>
+            <span class="keyboard-button" title="KEYBOARD"></span>
+          </form>
+        <div class="keyboard-wrapper keyboard-hidden">
         </div>
-        <div class="swiper-pagination"></div>
-    
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-        
-        <div class="swiper-scrollbar"></div>
+        <div class="lds-roller" id="spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <p class="info"></p>
+        <div class="slider">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-scrollbar"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
     </div>
 </main>
 <footer class="footer">

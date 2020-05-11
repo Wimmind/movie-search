@@ -1,41 +1,44 @@
 import swiper from './swiper';
 import doSlide from './doSlide';
-
+import state from '../index';
+// 552647f3
 const spinner = document.querySelector('#spinner');
 const fetch = require('node-fetch');
 
-export default async function getMovieSlides(word, num, newWord) {
-  spinner.style.display = 'block';
-  document.querySelector('.info').innerText = '';
-  const url = `https://www.omdbapi.com/?s=${word}&apikey=49ee8599&page=${num}`;
-  const res = await fetch(url);
-  const data = await res.json(); // объект фильмов
-  if (data.Response === 'True') {
-    const card = data.Search.map((item) => doSlide(item, num));
-    await Promise.all(card);
+let errorWindow = document.querySelector('.info');
 
+export default async function getMovieSlides(word, page, newWord) {
+  spinner.style.display = 'block';
+  errorWindow.innerText = '';
+
+  const url = `https://www.omdbapi.com/?s=${word}&apikey=552647f3&page=${page}&type=movie`;
+  const res = await fetch(url);
+  const data = await res.json();
+  state.countPage = Math.ceil(Number(data.totalResults) / 10);
+
+  if (data.Response === 'True') {
+    const card = data.Search.map((item) => doSlide(item, page));
+
+    await Promise.all(card);
+    
     if (newWord) {
       swiper.removeAllSlides();
     }
-
     card.forEach((item) => item.then((result) => {
       swiper.appendSlide(result);
     }));
-    document.querySelector('.info').innerText = `Showing results for "${word}"`;
+    errorWindow.innerText = `Showing results for "${word}"`;
   } else {
     if (data.Error === 'Movie not found!') {
-      document.querySelector('.info').innerText = `No results for "${word}"`;
+      errorWindow.innerText = `No results for "${word}"`;
     }
     if (data.Error === 'Too many results.') {
-      document.querySelector('.info').innerText = `There are too many results to "${word}" search`;
+      errorWindow.innerText = `There are too many results to "${word}" search`;
     }
     if (data.Error === 'Something went wrong.') {
-      document.querySelector('.info').innerText = 'You did not enter a search query';
+      errorWindow.innerText = 'You did not enter a search query';
     }
   }
   spinner.style.display = 'none';
 }
 
-
-getMovieSlides('dream', 1,false);
-document.querySelector('.search-input').selectionStart = document.querySelector('.search-input').value.length

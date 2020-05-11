@@ -1,49 +1,64 @@
-.swiper-container {
-@include media-mobile {
-    max-width: 300px;
-    margin: 0 auto;
+.slider {
+    position: relative;
 }
+
+.swiper-container {
+    width: calc(100% - 110px);
+    @include media-mobile {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
 
 .swiper-wrapper {
-    width: 100%;
     height: 600px;
     margin-bottom: 50px;
+    user-select: none;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 250px;
 }
 
 .card {
-    width: 300px !important;
-    border: 0;
-    margin: 10px 0px;  
-    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    max-height: 91%;
 }
 
 .card-header {
-    display: block;
-    height: 43px;
-    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
     overflow: hidden;
-    background-color: #fff;
     text-overflow: ellipsis;
+    white-space: nowrap;
     color: #000;
     text-align: center;
     font-size: 24px;
     padding: 15px;
-    white-space: pre-wrap; 
     text-decoration: none;
     &:hover {
-    color: crimson;
+        color: crimson;
+        text-decoration: underline;
     }
 }
 
 .card-body {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
     height: 445px;
-    background-size: cover;
+    object-fit: cover;
+    border: 0;
 }
 
 .card-footer {
     color: #000;
-    background-color: #fff;
     align-items: center;
     padding: 15px;
     padding-bottom: 5px;
@@ -52,26 +67,7 @@
     justify-content: space-between;
 }
 
-.card-imbd {
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 20px;
-}
 
-.card-imbd span {
-    position: relative;
-    padding-left: 10px;
-}
-
-.card-imbd span::before {
-    content: "";
-    position: absolute;
-    background-image: url(/img/star.svg);
-    width: 24px;
-    height: 24px;
-    top: -2px;
-    left: -25px;
-}
 
 .starIcon {
     display: inline-block;
@@ -81,4 +77,10 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.swiper-button-prev,.swiper-button-next {
+    @include media-mobile {
+        display: none;
+    }
 }

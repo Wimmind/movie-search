@@ -2,22 +2,20 @@ import Swiper from '../../node_modules/swiper/js/swiper.min';
 
 const swiper = new Swiper('.swiper-container', {
   loop: false,
-  spaceBetween: 80,
+  spaceBetween: 10,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
     dynamicBullets: true,
-    dynamicMainBullets: 4,
+    dynamicMainBullets: 10,
   },
-  centerInsufficientSlides: true,
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
   },
+  centerInsufficientSlides: true,
+  slidesPerView: 1,
   breakpoints: {
-    50: {
-      slidesPerView: 1,
-    },
     700: {
       slidesPerView: 2,
     },

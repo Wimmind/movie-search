@@ -1,7 +1,5 @@
-import languageСheck from './languageCheck';
-import getMovieSlides from './fillSwiper';
-
-const ruRe = new RegExp('(^[А-я0-9]+)(?!.*[A-z])$');
+const latinReg = /[a-z]/gi;
+const cyrillicReg = /[а-я]/gi;
 
 export default function showKeyboard() {
   const divWrapper = document.querySelector('.keyboard-wrapper');
@@ -10,6 +8,10 @@ export default function showKeyboard() {
 
   const keyboard = document.createElement('div');
   keyboard.classList.add('keyboard');
+
+  const hiddenButton = document.createElement('div');
+  
+  divWrapper
   divWrapper.append(keyboard);
 
   const buttons = [
@@ -44,12 +46,11 @@ export default function showKeyboard() {
   let language = 1;
 
   let capsLockButton = false;
-  let ctrlButton = false;
-  let altButton = false;
   let shiftButton = false;
 
   let ctrlAltPressed = false;
 
+  
   for (let i = 1; i <= 5; i += 1) {
     let lang = 1;
     const keyboardRow = document.createElement('div');
@@ -73,13 +74,6 @@ export default function showKeyboard() {
       if (button[0] === 'MetaLeft' || button[0] === 'AltLeft' || button[0] === 'AltRight' || button[0] === 'Delete' || button[0] === 'Tab'|| button[0] === 'ArrowDown' || button[0] === 'ArrowUp'
       || button[0] === 'ArrowRight' || button[0] === 'ArrowLeft') {
         buttonKey.classList.add('system');
-      }
-
-      if (localStorage.getItem('language') === '1') {
-        lang = 1;
-      }
-      if (localStorage.getItem('language') === '3') {
-        lang = 3;
       }
 
       buttonKey.textContent = button[lang];
@@ -152,12 +146,19 @@ export default function showKeyboard() {
   const spaceFunc = () => {
     textarea.setRangeText(' ', textarea.selectionStart, textarea.selectionEnd, 'end');
   };
-  const enterFunc = () => {
+  const enterFunc = async () => {
     const word = document.querySelector('.search-input').value;
-    if (ruRe.test(word)) {
-      languageСheck(word);
-    } else {
-      getMovieSlides(word);
+    try {
+      if (cyrillicReg.test(word) && !latinReg.test(word)) {
+        await languageСheck(word,1,true);
+      } else {
+        await getMovieSlides(word,1,true);
+      }
+    } catch (err) {
+      document.querySelector('.info').innerText = `Something went wrong, ${err.message}`;
+      console.error('Something went wrong', err);
+    } finally {
+      spinner.style.display = 'none';
     }
   };
   const deleteFunc = () => {
@@ -178,6 +179,7 @@ export default function showKeyboard() {
       document.querySelector('.search-input').focus();
     }
   });
+
   document.querySelector('.keyboard').addEventListener('mousedown', (event) => {
     document.querySelector('.search-input').focus();
     if (event.target.classList.contains('key')) {
@@ -226,7 +228,6 @@ export default function showKeyboard() {
           language = 1;
           ctrlAltPressed = false;
         }
-        localStorage.setItem('language', language);
         generateKeyboard(language, shiftButton);
       }
       
@@ -245,5 +246,41 @@ export default function showKeyboard() {
       const systemValue = event.target.getAttribute('system-value');
     }
   });
+  
+  const wrapper = document.querySelector('.keyboard-wrapper');
+
+  const position = JSON.parse(localStorage.getItem('position')) || {
+    top: 'calc(50% - 270px)',
+    left: 'calc(50% - 320px)',
+  };
+  wrapper.style.top = position.top;
+  wrapper.style.left = position.left;
+
+  wrapper.onmousedown = (event) => {
+    const shiftX = event.clientX - wrapper.getBoundingClientRect().left;
+    const shiftY = event.clientY - wrapper.getBoundingClientRect().top;
+
+    function moveAt(pageX, pageY) {
+      wrapper.style.top = `${pageY - shiftY}px`;
+      wrapper.style.left = `${pageX - shiftX}px`;
+    }
+
+    moveAt(event.pageX, event.pageY);
+
+    function onMouseMove(e) {
+      moveAt(e.pageX, e.pageY);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+
+    wrapper.onmouseup = () => {
+      position.top = wrapper.style.top;
+      position.left = wrapper.style.left;
+      localStorage.setItem('position', JSON.stringify(position));
+      document.removeEventListener('mousemove', onMouseMove);
+      wrapper.onmouseup = null;
+    };
+  };
+
 
 }
