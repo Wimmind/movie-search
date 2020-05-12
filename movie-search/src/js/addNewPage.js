@@ -1,24 +1,22 @@
-import state from '../index';
+
+import { state,spinner } from './variables';
+
 import getMovieSlides from './fillSwiper';
 import languageСheck from './languageCheck';
-const buttonSearch = document.querySelector('.search-button');
-const buttonClear = document.querySelector('.clear-button');
-const cyrillicReg = /^[А-ЯЁ][а-яё]*$/i;
-const spinner = document.querySelector('#spinner');
+import hasRusLetters from './hasRusLetters';
 
 export default async function addNewPage(currentWord, currentPage) {
-    if (currentPage<=state.countPage){
-        try {
-            if (cyrillicReg.test(currentWord)) {
-              await languageСheck(currentWord,currentPage,false);
-            } else {
-              await getMovieSlides(currentWord,currentPage,false);
-            }
-          } catch (err) {
-            document.querySelector('.info').innerText = `Something went wrong, ${err.message}`;
-            console.error('Something went wrong', err);
-          } finally {
-            spinner.style.display = 'none';
-          }
+  if (currentPage <= state.countPage) {
+    try {
+      if (hasRusLetters(currentWord)) {
+        await languageСheck(currentWord, currentPage, false);
+      } else {
+        await getMovieSlides(currentWord, currentPage, false);
+      }
+    } catch (err) {
+      document.querySelector('.info').innerText = `Something went wrong, ${err.message}`;
+    } finally {
+      spinner.style.display = 'none';
     }
+  }
 }

@@ -1,20 +1,15 @@
-
-const buttonSearch = document.querySelector('.search-button');
-const buttonClear = document.querySelector('.clear-button');
-const cyrillicReg = /^[А-ЯЁ][а-яё]*$/i;
-const spinner = document.querySelector('#spinner');
+import {buttonSearch,inputWord} from './variables';
 
 export default function showKeyboard() {
   const divWrapper = document.querySelector('.keyboard-wrapper');
   divWrapper.innerHTML = '';
-  const textarea = document.querySelector('.search-input');
 
   const keyboard = document.createElement('div');
   keyboard.classList.add('keyboard');
 
   const hiddenButton = document.createElement('div');
   hiddenButton.classList.add('clear-button_keyboard');
-  
+
   divWrapper.append(hiddenButton);
   divWrapper.append(keyboard);
 
@@ -50,13 +45,13 @@ export default function showKeyboard() {
   let language = 1;
 
   let capsLockButton = false;
-  let shiftButton = false;
+  const shiftButton = false;
 
   let ctrlAltPressed = false;
 
-  
+
   for (let i = 1; i <= 5; i += 1) {
-    let lang = 1;
+    const lang = 1;
     const keyboardRow = document.createElement('div');
     keyboardRow.classList.add('keyboard-row', `keyboard__row-${i}`);
     document.querySelector('.keyboard').append(keyboardRow);
@@ -75,7 +70,7 @@ export default function showKeyboard() {
       if (button[0] === 'Space') {
         buttonKey.classList.add('key_big', 'system');
       }
-      if (button[0] === 'MetaLeft' || button[0] === 'AltLeft' || button[0] === 'AltRight' || button[0] === 'Delete' || button[0] === 'Tab'|| button[0] === 'ArrowDown' || button[0] === 'ArrowUp'
+      if (button[0] === 'MetaLeft' || button[0] === 'AltLeft' || button[0] === 'AltRight' || button[0] === 'Delete' || button[0] === 'Tab' || button[0] === 'ArrowDown' || button[0] === 'ArrowUp'
       || button[0] === 'ArrowRight' || button[0] === 'ArrowLeft') {
         buttonKey.classList.add('system');
       }
@@ -132,38 +127,38 @@ export default function showKeyboard() {
     }
   };
   const backspaceFunc = () => {
-    const startText = textarea.selectionStart;
-    if (textarea.selectionStart !== textarea.selectionEnd) {
-      textarea.value = textarea.value.slice(0, textarea.selectionStart)
-        + textarea.value.slice(textarea.selectionEnd);
-      textarea.selectionEnd = startText;
-    } else if (textarea.selectionStart > 0) {
-      textarea.value = textarea.value.slice(0, textarea.selectionStart - 1)
-        + textarea.value.slice(textarea.selectionEnd);
-      textarea.selectionStart = startText - 1;
-      textarea.selectionEnd = startText - 1;
+    const startText = inputWord.selectionStart;
+    if (inputWord.selectionStart !== inputWord.selectionEnd) {
+      inputWord.value = inputWord.value.slice(0, inputWord.selectionStart)
+        + inputWord.value.slice(inputWord.selectionEnd);
+      inputWord.selectionEnd = startText;
+    } else if (inputWord.selectionStart > 0) {
+      inputWord.value = inputWord.value.slice(0, inputWord.selectionStart - 1)
+        + inputWord.value.slice(inputWord.selectionEnd);
+      inputWord.selectionStart = startText - 1;
+      inputWord.selectionEnd = startText - 1;
     }
   };
   const tabFunc = () => {
-    textarea.setRangeText('    ', textarea.selectionStart, textarea.selectionEnd, 'end');
+    inputWord.setRangeText('    ', inputWord.selectionStart, inputWord.selectionEnd, 'end');
   };
   const spaceFunc = () => {
-    textarea.setRangeText(' ', textarea.selectionStart, textarea.selectionEnd, 'end');
+    inputWord.setRangeText(' ', inputWord.selectionStart, inputWord.selectionEnd, 'end');
   };
   const enterFunc = async () => {
     buttonSearch.click();
   };
   const deleteFunc = () => {
-    const startText = textarea.selectionStart;
-    const endText = textarea.selectionEnd;
+    const startText = inputWord.selectionStart;
+    const endText = inputWord.selectionEnd;
     let longText = endText - startText;
     if (startText === endText) {
       longText = 1;
     }
-    textarea.value = textarea.value.slice(0, startText)
-      + textarea.value.slice(startText + longText);
-    textarea.selectionStart = startText;
-    textarea.selectionEnd = startText;
+    inputWord.value = inputWord.value.slice(0, startText)
+      + inputWord.value.slice(startText + longText);
+    inputWord.selectionStart = startText;
+    inputWord.selectionEnd = startText;
   };
 
   document.querySelector('.keyboard').addEventListener('click', (event) => {
@@ -179,9 +174,9 @@ export default function showKeyboard() {
       setTimeout(() => { event.target.classList.remove('active'); }, 300);
 
       if (!capsLockButton) {
-        textarea.setRangeText(event.target.getAttribute('value'), textarea.selectionStart, textarea.selectionEnd, 'end');
+        inputWord.setRangeText(event.target.getAttribute('value'), inputWord.selectionStart, inputWord.selectionEnd, 'end');
       } else {
-        textarea.setRangeText(event.target.getAttribute('value').toUpperCase(), textarea.selectionStart, textarea.selectionEnd, 'end');
+        inputWord.setRangeText(event.target.getAttribute('value').toUpperCase(), inputWord.selectionStart, inputWord.selectionEnd, 'end');
       }
 
       const systemValue = event.target.getAttribute('system-value');
@@ -212,7 +207,7 @@ export default function showKeyboard() {
         generateKeyboard(language, shiftButton);
       }
 
-      if (systemValue === 'MetaLeft'){
+      if (systemValue === 'MetaLeft') {
         if (!ctrlAltPressed) {
           language = 3;
           ctrlAltPressed = true;
@@ -222,23 +217,22 @@ export default function showKeyboard() {
         }
         generateKeyboard(language, shiftButton);
       }
-      
+
       if (systemValue === 'ArrowLeft') {
-        textarea.selectionEnd =  textarea.selectionEnd - 1 >= 0 ?  textarea.selectionEnd - 1 : 0;
+        inputWord.selectionEnd = inputWord.selectionEnd - 1 >= 0 ? inputWord.selectionEnd - 1 : 0;
       }
 
       if (systemValue === 'ArrowRight') {
-        textarea.selectionStart += 1;
+        inputWord.selectionStart += 1;
       }
     }
   });
   document.querySelector('.keyboard').addEventListener('mouseup', (event) => {
     if (event.target.classList.contains('key')) {
       event.target.classList.remove('active');
-      const systemValue = event.target.getAttribute('system-value');
     }
   });
-  
+
   const wrapper = document.querySelector('.keyboard-wrapper');
 
   const position = JSON.parse(localStorage.getItem('position')) || {
@@ -274,8 +268,7 @@ export default function showKeyboard() {
     };
   };
 
-  hiddenButton.addEventListener('click',()=>{
+  hiddenButton.addEventListener('click', () => {
     document.querySelector('.keyboard-button').click();
-  })
-
+  });
 }

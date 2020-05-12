@@ -10,7 +10,7 @@ const doSlide = async (film, page) => {
   cardLink.href = `https://www.imdb.com/title/${film.imdbID}/videogallery`;
   cardLink.target = '_blank';
   cardLink.innerText = film.Title;
-  cardLink.setAttribute('title',`${film.Title}`);
+  cardLink.setAttribute('title', `${film.Title}`);
   cardLink.classList.add('card-header');
 
   const cardImage = document.createElement('img');
@@ -25,11 +25,10 @@ const doSlide = async (film, page) => {
     }
   } catch (err) {
     cardImage.src = '../assets/image/no-poster.jpg';
-    console.error('we have trouble with Poster', film.Poster);
   }
   const cardFooter = document.createElement('div');
   cardFooter.classList.add('card-footer');
-  
+
   const rating = await getRating(film.imdbID, page) === 'N/A' ? 'nothing' : await getRating(film.imdbID, page);
 
   cardFooter.innerHTML = `${film.Year}<div style="display:flex; align-items:center;"><span class='starIcon'></span>${rating}</div>`;
@@ -37,7 +36,7 @@ const doSlide = async (film, page) => {
   card.append(cardLink);
   card.append(cardImage);
   card.append(cardFooter);
-  slide.append(card)
+  slide.append(card);
   return slide;
 };
 
