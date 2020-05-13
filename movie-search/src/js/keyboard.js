@@ -236,7 +236,7 @@ export default function showKeyboard() {
   const wrapper = document.querySelector('.keyboard-wrapper');
 
   const position = JSON.parse(localStorage.getItem('position')) || {
-    top: 'calc(50% - 270px)',
+    top: 'calc(50% - 100px)',
     left: 'calc(50% - 320px)',
   };
   wrapper.style.top = position.top;
