@@ -2,8 +2,6 @@ import { state,spinner,errorWindow } from './variables';
 import swiper from './swiper';
 import doSlide from './doSlide';
 import showError from './showError';
-// 552647f3 key1
-// 49ee8599 key2
 
 export default async function getMovieSlides(word, page, newWord) {
   spinner.style.display = 'block';
